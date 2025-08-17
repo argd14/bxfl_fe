@@ -17,6 +17,8 @@ import {
   ArrowRightOutlined,
 } from '@ant-design/icons'
 import styles from './create-order.module.css'
+import { useRouter } from 'next/navigation'
+import { NavbarLogo } from '@/components/navbar-logo'
 
 const { Header, Sider, Content } = Layout
 const { Title, Text } = Typography
@@ -24,20 +26,28 @@ const { Title, Text } = Typography
 
 const CreateOrder = () => {
 
-      const [form] = Form.useForm()
+  const router = useRouter();
+
+  const goToOrders = () => {
+    router.push('/orders');
+  };
+
+  const [form] = Form.useForm()
 
   const onFinish = (values: any) => {
     console.log('Datos del formulario:', values)
   }
-    return ( 
-        <Layout className={styles.layout}>
+  return (
+    <Layout className={styles.layout}>
       <Sider breakpoint="lg" collapsedWidth="0" className={styles.sider}>
-        <div className={styles.logo}>📦 boxful</div>
+        <NavbarLogo />
         <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
+          <Header style={{ fontSize: '16px', fontWeight: 'bold', backgroundColor: 'transparent' }} >Menu</Header>
+
           <Menu.Item key="1" icon={<PlusOutlined />}>
             Crear orden
           </Menu.Item>
-          <Menu.Item key="2" icon={<FileSearchOutlined />}>
+          <Menu.Item key="2" icon={<FileSearchOutlined />} onClick={goToOrders}>
             Historial
           </Menu.Item>
         </Menu>
@@ -68,7 +78,7 @@ const CreateOrder = () => {
                 name="direccionRecoleccion"
                 rules={[{ required: true }]}
               >
-                <Input defaultValue="Colonia Las Magnolias, calle militar 1, San Salvador" />
+                <Input defaultValue="Colonia La rabida, calle san antonio, San Salvador" />
               </Form.Item>
 
               <Form.Item
@@ -82,12 +92,12 @@ const CreateOrder = () => {
               <Row gutter={16}>
                 <Col xs={24} md={12}>
                   <Form.Item label="Nombres" name="nombres" rules={[{ required: true }]}>
-                    <Input defaultValue="Gabriela Reneé" />
+                    <Input defaultValue="Andres Ramiro" />
                   </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
                   <Form.Item label="Apellidos" name="apellidos" rules={[{ required: true }]}>
-                    <Input defaultValue="Días López" />
+                    <Input defaultValue="Garcia Duran" />
                   </Form.Item>
                 </Col>
               </Row>
@@ -95,7 +105,7 @@ const CreateOrder = () => {
               <Row gutter={16}>
                 <Col xs={24} md={12}>
                   <Form.Item label="Correo electrónico" name="correo" rules={[{ required: true, type: 'email' }]}>
-                    <Input defaultValue="gabbydiaz@gmail.com" />
+                    <Input defaultValue="argd@gmail.com" />
                   </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
@@ -110,7 +120,7 @@ const CreateOrder = () => {
                 name="direccionDestinatario"
                 rules={[{ required: true }]}
               >
-                <Input defaultValue="Final 49 Av. Sur y Bulevar Los Próceres, Smartcenter, Bodega #8, San Salvador" />
+                <Input defaultValue="res buena vista 1, Santa Tecla, La Libertad" />
               </Form.Item>
 
               <Row gutter={16}>
@@ -127,7 +137,7 @@ const CreateOrder = () => {
               </Row>
 
               <Form.Item label="Punto de referencia" name="referencia">
-                <Input defaultValue="Cerca de redondel Árbol de la Paz" />
+                <Input defaultValue="Cerca de el parque san martin" />
               </Form.Item>
 
               <Form.Item label="Indicaciones" name="indicaciones">
@@ -144,6 +154,6 @@ const CreateOrder = () => {
         </Content>
       </Layout>
     </Layout>
-     );
+  );
 }
 export default CreateOrder;

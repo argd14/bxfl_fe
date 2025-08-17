@@ -1,12 +1,14 @@
 'use client'
 
-import { Layout, Menu, Table, Button, DatePicker, Typography, Space } from 'antd'
+import { Layout, Menu, Table, Button, DatePicker, Typography, Space  } from 'antd'
 import {
   FileSearchOutlined,
   PlusOutlined,
   DownloadOutlined,
 } from '@ant-design/icons'
 import styles from './orders.module.css'
+import { NavbarLogo } from '@/components/navbar-logo'
+import { useRouter } from 'next/navigation';
 
 const { Header, Sider, Content } = Layout
 const { RangePicker } = DatePicker
@@ -48,9 +50,9 @@ const columns = [
 const data = [
   {
     key: '1',
-    orden: '3446788',
-    nombre: 'Julio',
-    apellidos: 'Almendarez',
+    orden: '1120928',
+    nombre: 'Andres',
+    apellidos: 'Garcia',
     departamento: 'San Salvador',
     municipio: 'San Salvador',
     paquetes: 4,
@@ -58,13 +60,19 @@ const data = [
 ]
 
 const Orders = () => {
+  const router = useRouter();
+
+  const goToCreateOrder = () => {
+    router.push('/orders/create-order');
+  };
      return (
     <Layout className={styles.layout}>
       <Sider breakpoint="lg" collapsedWidth="0" className={styles.sider}>
-        <div className={styles.logo}>📦 boxful</div>
+        <NavbarLogo/>
         <Menu theme="light" mode="inline" defaultSelectedKeys={['2']}>
-          <Menu.Item key="1" icon={<PlusOutlined />}>
-            Crear orden
+          <Header style={{ fontSize: '16px', fontWeight: 'bold', backgroundColor: 'transparent' }} >Menu</Header>
+          <Menu.Item key="1" icon={<PlusOutlined />} style={{ color: '#2E49CE' }} onClick={goToCreateOrder}>
+                Crear orden
           </Menu.Item>
           <Menu.Item key="2" icon={<FileSearchOutlined />}>
             Historial
